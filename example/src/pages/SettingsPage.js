@@ -18,7 +18,6 @@ import {
   VisuallyHidden,
   BaseCheckbox,
   IconButton,
-  Flex,
   Stack,
 } from "@strapi/design-system";
 import EditIcon from "@strapi/icons/Pencil";

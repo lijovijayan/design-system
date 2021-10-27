@@ -10,6 +10,7 @@ import {
 } from "@strapi/design-system";
 
 import Wysiwyg from './../shared/Wysiwyg/index';
+import AccordionsCM from "../shared/AccordionsCM";
 
 const Inputs = ({
   name,
@@ -141,6 +142,12 @@ const Inputs = ({
           value={value}
           error='This is a required field'
         />
+      )
+    }
+
+    case "accordions": {
+      return (
+        <AccordionsCM />
       )
     }
 

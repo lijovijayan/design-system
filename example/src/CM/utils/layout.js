@@ -75,12 +75,21 @@ const layout = [
   //     size: 4,
   //   },
   // ],
+  // [
+  //   {
+  //     name: "content",
+  //     label: "Content",
+  //     description: "",
+  //     type: "wysiwyg",
+  //     size: 12,
+  //   }
+  // ],
   [
     {
       name: "content",
       label: "Content",
       description: "",
-      type: "wysiwyg",
+      type: "accordions",
       size: 12,
     }
   ],
