@@ -10,8 +10,8 @@ import { TextInput } from '@strapi/design-system/TextInput';
 import Plus from '@strapi/icons/Plus';
 import Earth from '@strapi/icons/Earth';
 import User from '@strapi/icons/User';
-import Pencil from '@strapi/icons/Pencil';
 import Trash from '@strapi/icons/Trash';
+import Drag from '@strapi/icons/Drag';
 
 const fields = [
   {
@@ -64,8 +64,37 @@ const fields = [
         label: 'oy label'
       }
     ]
+  },
+  {
+    id: 'field-4',
+    label: 'yeeee',
+    disabled: false,
+    inputs: [
+      {
+        name: 'name',
+        placeholder: 'michka',
+        label: 'yo label'
+      },
+      {
+        name: 'name',
+        placeholder: 'des ronronscelestes 🔥',
+        label: 'oy label'
+      }
+    ]
   }
-]
+];
+
+const TextButtonCustom = styled(TextButton)`
+  height: 100%;
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  justify-content: center;
+  span {
+    font-weight: 600;
+    font-size: 14px;
+  }
+`;
 
 const CustomIconButton = styled(IconButton)`
   background-color: transparent;
@@ -87,6 +116,33 @@ const CustomIconButton = styled(IconButton)`
 
 const RepeatableComponent = () => {
   const [expanded, setExpanded] = useState(null);
+  const [myFields, setMyFields] = useState(fields);
+
+  const randomNumber = () => {
+    return Math.round(Math.random() * 1000);
+  };
+
+  const handleAddEntry = () => {
+    const id = `field-${randomNumber()}`;
+    setMyFields(prev => [...myFields, {
+      id,
+      label: 'bonjour',
+      disabled: false,
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'michka',
+          label: 'yo label'
+        },
+        {
+          name: 'name',
+          placeholder: 'des ronronscelestes 🔥',
+          label: 'oy label'
+        }
+      ]
+    }]);
+    setExpanded(id);
+  }
 
   const handleToggle = (fieldId) => {
     if(expanded === fieldId) {
@@ -94,19 +150,18 @@ const RepeatableComponent = () => {
     } else {
       setExpanded(fieldId);
     }
-
   }
 
   return (
     <AccordionGroup
       footer={
-        <Flex justifyContent="center" height="48px" background="neutral150">
-          <TextButton disabled={true} startIcon={<Plus />}>
+        <Flex justifyContent="center" height="48px" background="neutral0" hasRadius>
+          <TextButtonCustom onClick={handleAddEntry} startIcon={<Plus />}>
             Add an entry
-          </TextButton>
+          </TextButtonCustom>
         </Flex>
       }
-      label="Label"
+      label="Rep component"
       labelAction={
         <Tooltip description="Content of the tooltip">
           <button
@@ -122,15 +177,14 @@ const RepeatableComponent = () => {
         </Tooltip>
       }
     >
-        {fields.map(field => {
+        {myFields.map(field => {
           const fieldExpanded = expanded === field.id;
 
           return (
             <Accordion 
               disabled={field.disabled} 
               key={field.id} 
-              // expanded={fieldExpanded} 
-              expanded={true} 
+              expanded={fieldExpanded} 
               toggle={() => handleToggle(field.id)} 
               id={field.id} 
               size="S"
@@ -139,8 +193,22 @@ const RepeatableComponent = () => {
                 startIcon={<User aria-hidden={true} />}
                 action={
                   <Stack horizontal size={0}>
-                    <CustomIconButton expanded={fieldExpanded} noBorder onClick={() => console.log('edit')} label="Edit" icon={<Pencil />} />
-                    <CustomIconButton expanded={fieldExpanded} noBorder onClick={() => console.log('delete')} label="Delete" icon={<Trash />} />
+                    <CustomIconButton 
+                      expanded={fieldExpanded} 
+                      noBorder 
+                      onClick={() => console.log('delete')} 
+                      label="Delete" 
+                      icon={<Trash />} 
+                      disabled={field.disabled}
+                    />
+                    <CustomIconButton
+                      expanded={fieldExpanded} 
+                      noBorder 
+                      onClick={() => console.log('drag')} 
+                      label="Drag" 
+                      icon={<Drag />} 
+                      disabled={field.disabled}
+                    />
                   </Stack>
                 }
                 title={field.label}

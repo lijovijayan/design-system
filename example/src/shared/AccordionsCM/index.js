@@ -3,6 +3,7 @@ import { Box } from '@strapi/design-system/Box';
 import { Flex } from '@strapi/design-system/Flex';
 import { ContentLayout } from '@strapi/design-system/Layout';
 import RepeatableComponent from './RepeatableComponent';
+import DZComponent from './DZComponent';
 
 const AccordionsCM = () => {
   return (
@@ -22,17 +23,7 @@ const AccordionsCM = () => {
             <RepeatableComponent />
           </Box>
 
-          <Box
-            hasRadius 
-            background='neutral0' 
-            shadow='tableShadow'
-            paddingLeft={7} 
-            paddingRight={7} 
-            paddingBottom={6} 
-            paddingTop={6}
-          >
-            DZ accordeon
-          </Box>
+          <DZComponent />
         </Box>
 
         <Box 
