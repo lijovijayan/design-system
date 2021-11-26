@@ -5,6 +5,7 @@ import { Box } from '../Box';
 import { FocusTrap } from '../FocusTrap';
 import { Portal } from '../Portal';
 import { ModalContext } from './ModalContext';
+import Draggable from 'react-draggable';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -38,15 +39,18 @@ export const ModalLayout = ({ onClose, labelledBy, ...props }) => {
       <ModalContext.Provider value={onClose}>
         <ModalWrapper>
           <FocusTrap onEscape={onClose}>
-            <ModalContent
-              aria-labelledby={labelledBy}
-              background="neutral0"
-              hasRadius
-              shadow="popupShadow"
-              role="dialog"
-              aria-modal={true}
-              {...props}
-            />
+            <Draggable handle=".modal-wrapper>div">
+              <ModalContent
+                aria-labelledby={labelledBy}
+                background="neutral0"
+                hasRadius
+                shadow="popupShadow"
+                role="dialog"
+                aria-modal={true}
+                className="modal-wrapper"
+                {...props}
+              />
+            </Draggable>
           </FocusTrap>
         </ModalWrapper>
       </ModalContext.Provider>
